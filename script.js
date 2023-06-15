@@ -1,37 +1,29 @@
 // Create a function called getComputerChoice
 // that return Rock, Paper, Scissors randomly
-const options = ["Rock", "Paper", "Scissors"];
-function getComputerChoice(options) {
+function getComputerChoice() {
+  const options = ["Rock", "Paper", "Scissors"];
   return options[Math.floor(Math.random() * options.length)];
 }
 
-// Create a function called playRound() that play a single round of RPS
-// takes two parameters - playerSelection and computer Selection
-// return a string "You Lose! {winner} beats {loser}"
-// make playerSelection parameter case-insensitive
+function getplayerChoice() {
+  const playerChoice = prompt("Player Choice: Rock, Paper, or Scissors?", "");
 
-let computerSelection = getComputerChoice(options);
-let playerChoice = prompt("Player Choice: Rock, Paper, or Scissors?", "");
-
-function checkPlayerChoice(playerChoice) {
   if (
     playerChoice.toLowerCase() == "rock" ||
     playerChoice.toLowerCase() == "paper" ||
     playerChoice.toLowerCase() == "scissors"
   ) {
     return playerChoice;
+  } else {
+    const typoMessage = "Please enter Rock, Paper, or Scissors!";
+    return typoMessage;
   }
-  const typoMessage = "Please enter Rock, Paper, or Scissors!";
-  return typoMessage;
 }
 
-/* 
-const playerSelection = playerChoice.charAt(0).toUpperCase() + 
-return(playerSelection) */
+// Create a function called playRound() that play a single round of RPS
+// takes two parameters - playerSelection and computer Selection
 
 function playRound(playerSelection, computerSelection) {
-  playerSelection = checkPlayerChoice(playerChoice);
-
   if (playerSelection.toLowerCase() == computerSelection.toLowerCase()) {
     return "Tie";
   } else if (playerSelection.toLowerCase() == "rock") {
@@ -57,30 +49,55 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-//playRound(playerChoice, computerSelection);
-
-// Create a function called game()
-// Combine previous function to play a 5 round
-// that keeps score
-// reports a winner or loser at the end
+let playerScore = 0;
+let computerScore = 0;
 
 function game() {
-  let playerScore = 0;
-  let copmuterScore = 0;
+  const playerSelection = getplayerChoice();
+  const computerSelection = getComputerChoice();
 
-  let checkWin = /You Win/;
-  let checkLose = /You Lose/;
+  let roundString = playRound(playerSelection, computerSelection);
 
-  let roundResult = playRound(playerChoice, computerSelection);
-  if (checkWin.test(roundResult)) {
+  if (roundString.includes("You Win")) {
     playerScore += 1;
-    console.log(roundResult);
-  } else if (checkLose.test(roundResult)) {
-    copmuterScore += 1;
-    console.log(roundResult);
-  } else console.log("Tie");
+    console.log(roundString + ` ${playerScore} : ${computerScore}`);
+  } else if (roundString.includes("You Lose")) {
+    computerScore += 1;
+    console.log(roundString + ` ${playerScore} : ${computerScore}`);
+  } else if (roundString.includes("Tie")) {
+    console.log(roundString + ` ${playerScore} : ${computerScore}`);
+  } else {
+    console.log(roundString);
+  }
 }
 
+game();
 
 game();
-// for (let gameRound = 1; gameRound < 6; gameRound++) {}
+
+game();
+
+game();
+
+game();
+
+// function game() does not keep track of computer score
+/* function game() {
+    const playerSelection = getplayerChoice();
+    const computerSelection = getComputerChoice();
+
+    let roundString = playRound(playerSelection, computerSelection);
+    let roundScore = roundString.slice(0,7);
+
+    if (roundScore == 'You Win') {
+        playerScore += 1;
+        console.log(roundString + ` ${playerScore} : ${computerScore}`);
+    } else if (roundScore == 'You Lose') {
+        computerScore += 1;
+        console.log(roundString + ` ${playerScore} : ${computerScore}`);
+    } else if (roundScore == 'Tie') {
+        console.log(roundString + ` ${playerScore} : ${computerScore}`);
+    } else {
+        console.log(roundString + ` ${playerScore} : ${computerScore}`);
+    }
+} */
