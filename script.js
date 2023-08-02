@@ -1,3 +1,10 @@
+// DOM Manipulation and Event Captures
+const buttons = document.querySelectorAll("button");
+
+const getPlayerChoice = e => e.target.textContent;
+
+buttons.forEach(button => button.addEventListener("click", playRound));
+
 // Create a function called getComputerChoice
 // that return Rock, Paper, Scissors randomly
 function getComputerChoice() {
@@ -5,55 +12,45 @@ function getComputerChoice() {
   return options[Math.floor(Math.random() * options.length)];
 }
 
-function getplayerChoice() {
-  const playerChoice = prompt("Player Choice: Rock, Paper, or Scissors?", "");
-
-  if (
-    playerChoice.toLowerCase() == "rock" ||
-    playerChoice.toLowerCase() == "paper" ||
-    playerChoice.toLowerCase() == "scissors"
-  ) {
-    return playerChoice;
-  } else {
-    const typoMessage = "Please enter Rock, Paper, or Scissors!";
-    return typoMessage;
-  }
-}
-
 // Create a function called playRound() that play a single round of RPS
 // takes two parameters - playerSelection and computer Selection
 
-function playRound(playerSelection, computerSelection) {
-  if (playerSelection.toLowerCase() == computerSelection.toLowerCase()) {
-    return "Tie";
-  } else if (playerSelection.toLowerCase() == "rock") {
+
+
+
+function playRound(e) {
+
+  const playerSelection = getPlayerChoice(e);
+  const computerSelection = getComputerChoice();
+
+  if (playerSelection == computerSelection) {
+    console.log("Tie"); 
+  } else if (playerSelection == "Rock") {
     if (computerSelection == "Paper") {
-      return `You Lose! ${computerSelection} beats ${playerSelection}`;
+      console.log(`You Lose! ${computerSelection} beats ${playerSelection}`) ;
     } else {
-      return `You Win! ${playerSelection} beats ${computerSelection}`;
+      console.log(`You Win! ${playerSelection} beats ${computerSelection}`) ;
     }
-  } else if (playerSelection.toLowerCase() == "paper") {
+  } else if (playerSelection == "Paper") {
     if (computerSelection == "Scissors") {
-      return `You Lose! ${computerSelection} beats ${playerSelection}`;
+      console.log(`You Lose! ${computerSelection} beats ${playerSelection}`) ;
     } else {
-      return `You Win! ${playerSelection} beats ${computerSelection}`;
+      console.log(`You Win! ${playerSelection} beats ${computerSelection}`) ;
     }
-  } else if (playerSelection.toLowerCase() == "scissors") {
-    if (computerSelection == "rock") {
-      return `You Lose! ${computerSelection} beats ${playerSelection}`;
+  } else if (playerSelection == "Scissors") {
+    if (computerSelection == "Rock") {
+      console.log(`You Lose! ${computerSelection} beats ${playerSelection}`) ;
     } else {
-      return `You Win! ${playerSelection} beats ${computerSelection}`;
+      console.log(`You Win! ${playerSelection} beats ${computerSelection}`) ;
     }
-  } else {
-    return playerSelection;
   }
-}
+} 
 
 let playerScore = 0;
 let computerScore = 0;
 
-function game() {
-  const playerSelection = getplayerChoice();
+function game(e) {
+  const playerSelection = getplayerChoice(e);
   const computerSelection = getComputerChoice();
 
   let roundString = playRound(playerSelection, computerSelection);
@@ -71,33 +68,4 @@ function game() {
   }
 }
 
-game();
 
-game();
-
-game();
-
-game();
-
-game();
-
-// function game() does not keep track of computer score
-/* function game() {
-    const playerSelection = getplayerChoice();
-    const computerSelection = getComputerChoice();
-
-    let roundString = playRound(playerSelection, computerSelection);
-    let roundScore = roundString.slice(0,7);
-
-    if (roundScore == 'You Win') {
-        playerScore += 1;
-        console.log(roundString + ` ${playerScore} : ${computerScore}`);
-    } else if (roundScore == 'You Lose') {
-        computerScore += 1;
-        console.log(roundString + ` ${playerScore} : ${computerScore}`);
-    } else if (roundScore == 'Tie') {
-        console.log(roundString + ` ${playerScore} : ${computerScore}`);
-    } else {
-        console.log(roundString + ` ${playerScore} : ${computerScore}`);
-    }
-} */
