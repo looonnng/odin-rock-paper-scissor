@@ -17,7 +17,7 @@ body {
   flex-direction: column;
 }
 
-#result {
+.result {
   margin-bottom: 1rem;
 }
 
