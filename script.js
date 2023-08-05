@@ -5,6 +5,10 @@ const getPlayerChoice = e => e.target.textContent;
 
 buttons.forEach(button => button.addEventListener("click", playRound));
 
+const resultDisplay = document.querySelector('#result');
+
+
+
 // Create a function called getComputerChoice
 // that return Rock, Paper, Scissors randomly
 function getComputerChoice() {
@@ -24,28 +28,31 @@ function playRound(e) {
   const computerSelection = getComputerChoice();
 
   if (playerSelection == computerSelection) {
-    console.log("Tie"); 
+    resultDisplay.textContent = "Tie"; 
   } else if (playerSelection == "Rock") {
     if (computerSelection == "Paper") {
-      console.log(`You Lose! ${computerSelection} beats ${playerSelection}`) ;
+      resultDisplay.textContent = `You lose! ${computerSelection} beats ${playerSelection}` ;
     } else {
-      console.log(`You Win! ${playerSelection} beats ${computerSelection}`) ;
+      resultDisplay.textContent = `You win! ${playerSelection} beats ${computerSelection}` ;
     }
   } else if (playerSelection == "Paper") {
     if (computerSelection == "Scissors") {
-      console.log(`You Lose! ${computerSelection} beats ${playerSelection}`) ;
+      resultDisplay.textContent = `You lose! ${computerSelection} beats ${playerSelection}` ;
     } else {
-      console.log(`You Win! ${playerSelection} beats ${computerSelection}`) ;
+      resultDisplay.textContent = `You win! ${playerSelection} beats ${computerSelection}` ;
     }
   } else if (playerSelection == "Scissors") {
     if (computerSelection == "Rock") {
-      console.log(`You Lose! ${computerSelection} beats ${playerSelection}`) ;
+      resultDisplay.textContent = `You lose! ${computerSelection} beats ${playerSelection}` ;
     } else {
-      console.log(`You Win! ${playerSelection} beats ${computerSelection}`) ;
+      resultDisplay.textContent = `You win! ${playerSelection} beats ${computerSelection}` ;
     }
   }
 } 
 
+
+
+//Rewrite Game to track score and play first to 5
 let playerScore = 0;
 let computerScore = 0;
 
